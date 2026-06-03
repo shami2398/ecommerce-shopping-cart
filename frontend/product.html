@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Products</title>
+
+<style>
+
+body{
+    font-family:Arial,sans-serif;
+    background:#f4f4f4;
+    padding:30px;
+}
+
+h1{
+    text-align:center;
+    color:green;
+    margin-bottom:30px;
+}
+
+#products{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:20px;
+}
+
+.card{
+    background:white;
+    width:250px;
+    padding:15px;
+    border-radius:10px;
+    box-shadow:0px 2px 8px rgba(0,0,0,0.2);
+    text-align:center;
+}
+
+.card img{
+    width:200px;
+    height:200px;
+    object-fit:cover;
+    border-radius:8px;
+}
+
+.card h2{
+    margin-top:10px;
+}
+
+.card h3{
+    color:green;
+    margin:10px 0;
+}
+
+.card p{
+    margin-bottom:10px;
+}
+
+button{
+    background:green;
+    color:white;
+    border:none;
+    padding:10px 15px;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:darkgreen;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>🛒 Products</h1>
+
+<div id="products"></div>
+
+<script>
+
+async function loadProducts(){
+
+    try{
+
+        const response =
+        await fetch("http://localhost:5000/api/products");
+
+        const products =
+        await response.json();
+
+        let output = "";
+
+        products.forEach(product => {
+
+            output += `
+
+            <div class="card">
+
+                <img
+                src="./image/${product.image}"
+                alt="${product.name}">
+
+                <h2>${product.name}</h2>
+
+                <h3>₹${product.price}</h3>
+
+                <p>${product.description}</p>
+
+                <button onclick="addToCart('${product._id}')">
+                    Add To Cart
+                </button>
+
+            </div>
+
+            `;
+        });
+
+        document.getElementById("products").innerHTML =
+        output;
+
+    }
+    catch(error){
+
+        console.log(error);
+
+        document.getElementById("products").innerHTML =
+        "<h2>Failed to load products</h2>";
+    }
+}
+
+async function addToCart(productId){
+
+    try{
+
+        const response = await fetch(
+            "http://localhost:5000/api/cart/add",
+            {
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify({
+                    userId:"6a1db2a687f2d10c9989a9e6",
+                    productId:productId,
+                    quantity:1
+                })
+            }
+        );
+
+        const result = await response.json();
+
+        alert(result.message || "Product Added To Cart");
+
+    }
+    catch(error){
+
+        console.log(error);
+        alert("Failed To Add Product");
+    }
+}
+
+loadProducts();
+
+</script>
+
+</body>
+</html>

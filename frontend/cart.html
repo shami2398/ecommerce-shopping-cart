@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Shopping Cart</title>
+
+<style>
+
+body{
+    font-family:Arial;
+    background:#f4f4f4;
+    padding:30px;
+}
+
+h1{
+    color:green;
+}
+
+.cart-item{
+    background:white;
+    padding:20px;
+    margin-bottom:20px;
+    border-radius:10px;
+    box-shadow:0px 2px 8px gray;
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+
+.cart-item img{
+    width:120px;
+    height:120px;
+    object-fit:cover;
+    border-radius:10px;
+}
+
+.cart-details{
+    flex:1;
+}
+
+.remove-btn{
+    background:red;
+    color:white;
+    border:none;
+    padding:10px 15px;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.checkout-btn{
+    background:green;
+    color:white;
+    border:none;
+    padding:15px 25px;
+    border-radius:5px;
+    cursor:pointer;
+    font-size:18px;
+}
+
+.empty{
+    font-size:25px;
+    color:red;
+    font-weight:bold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>🛒 My Shopping Cart</h1>
+
+<div id="cartItems"></div>
+
+<h2 id="total"></h2>
+
+<button
+id="checkoutBtn"
+class="checkout-btn"
+onclick="goCheckout()">
+Checkout
+</button>
+
+<script>
+
+async function loadCart(){
+
+    const response =
+    await fetch("http://localhost:5000/api/cart");
+
+    const cart =
+    await response.json();
+
+    let output = "";
+    let total = 0;
+
+    if(cart.length===0){
+
+        document.getElementById("cartItems").innerHTML =
+        "<p class='empty'>Your Cart Is Empty</p>";
+
+        document.getElementById("total").innerHTML =
+        "";
+
+        document.getElementById("checkoutBtn").style.display =
+        "none";
+
+        return;
+    }
+
+    cart.forEach(item=>{
+
+        total +=
+        item.productId.price * item.quantity;
+
+        output += `
+
+        <div class="cart-item">
+
+            <img
+            src="./image/${item.productId.image}"
+            alt="${item.productId.name}">
+
+            <div class="cart-details">
+
+                <h2>${item.productId.name}</h2>
+
+                <h3>Price : ₹${item.productId.price}</h3>
+
+                <h3>Quantity : ${item.quantity}</h3>
+
+            </div>
+
+            <button
+            class="remove-btn"
+            onclick="removeItem('${item._id}')">
+            Remove
+            </button>
+
+        </div>
+
+        `;
+    });
+
+    document.getElementById("cartItems").innerHTML =
+    output;
+
+    document.getElementById("total").innerHTML =
+    "Total Amount : ₹" + total;
+}
+
+async function removeItem(id){
+
+    await fetch(
+        "http://localhost:5000/api/cart/" + id,
+        {
+            method:"DELETE"
+        }
+    );
+
+    alert("Item Removed From Cart");
+
+    location.reload();
+}
+
+function goCheckout(){
+
+    window.location.href =
+    "checkout.html";
+}
+
+loadCart();
+
+</script>
+
+</body>
+
+</html>
