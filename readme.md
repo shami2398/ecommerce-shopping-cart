@@ -128,4 +128,4 @@ Add screenshots here:
 
 ## 👩‍💻 Developed By
 
-Shamitri
+Shamithri
