@@ -1,37 +1,51 @@
-# 🛒 E-Commerce Shopping Cart
+# 🛒 E-Commerce Shopping Cart Web Application
 
-A full-stack E-Commerce Shopping Cart web application built using Node.js, Express.js, MongoDB Atlas, HTML, CSS, and JavaScript.
+## 📌 Project Overview
+
+This is a Full Stack E-Commerce Shopping Cart Web Application developed using HTML, CSS, JavaScript, Node.js, Express.js, and MongoDB Atlas.
+
+The application allows users to register, login, view products, add products to the cart, remove products from the cart, and place orders through a checkout system.
 
 ---
 
 ## 🚀 Features
 
-### Authentication
+### User Module
 - User Registration
 - User Login
-- Password Hashing using bcrypt
+- User Profile
+- Logout Functionality
 
-### Products
-- Add Products
+### Product Module
 - View Products
-- Product Details
+- Product Images
+- Product Prices
+- Product Descriptions
 
-### Cart
+### Cart Module
 - Add To Cart
 - View Cart
 - Remove From Cart
-- Checkout
+- Calculate Total Amount
+
+### Checkout Module
+- Shipping Details Form
+- Order Confirmation
+- Success Page
 
 ### Database
 - MongoDB Atlas Integration
+- Product Storage
+- User Storage
+- Cart Storage
 
 ---
 
-## 🛠 Tech Stack
+## 🛠️ Technologies Used
 
 ### Frontend
-- HTML
-- CSS
+- HTML5
+- CSS3
 - JavaScript
 
 ### Backend
@@ -42,56 +56,73 @@ A full-stack E-Commerce Shopping Cart web application built using Node.js, Expre
 - MongoDB Atlas
 - Mongoose
 
-### Security
-- bcryptjs
+### Tools
+- VS Code
+- Thunder Client
+- Git
+- GitHub
 
 ---
 
-## 📁 Project Structure
+## 📂 Project Structure
 
+```text
 ecommerce_store
 │
 ├── backend
-│ ├── config
-│ │ └── db.js
-│ │
-│ ├── controllers
-│ │ ├── authController.js
-│ │ ├── productController.js
-│ │ └── cartController.js
-│ │
-│ ├── models
-│ │ ├── User.js
-│ │ ├── Product.js
-│ │ └── Cart.js
-│ │
-│ ├── routes
-│ │ ├── authRoutes.js
-│ │ ├── productRoutes.js
-│ │ └── cartRoutes.js
-│ │
-│ └── server.js
+│   ├── config
+│   ├── controllers
+│   ├── models
+│   ├── routes
+│   └── server.js
 │
 ├── frontend
-│ ├── index.html
-│ ├── register.html
-│ ├── login.html
-│ ├── product.html
-│ ├── cart.html
-│ └── profile.html
+│   ├── image
+│   ├── index.html
+│   ├── register.html
+│   ├── login.html
+│   ├── product.html
+│   ├── cart.html
+│   ├── checkout.html
+│   ├── profile.html
+│   └── success.html
 │
-├── .env
+├── screenshots
 ├── package.json
-└── README.md
+├── README.md
+└── .env.example
+```
 
 ---
 
-## ⚙ Installation
+## 📸 Screenshots
+
+### Home Page
+![Home](screenshots/home.png)
+
+### Register Page
+![Register](screenshots/register.png)
+
+### Login Page
+![Login](screenshots/login.png)
+
+### Products Page
+![Products](screenshots/products.png)
+
+### Cart Page
+![Cart](screenshots/cart.png)
+
+### Checkout Page
+![Checkout](screenshots/checkout.png)
+
+---
+
+## ⚙️ Installation
 
 ### Clone Repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/yourusername/ecommerce-shopping-cart.git
 ```
 
 ### Install Dependencies
@@ -100,32 +131,77 @@ git clone <repository-url>
 npm install
 ```
 
-### Start Server
+### Configure Environment Variables
+
+Create a `.env` file:
+
+```env
+PORT=5000
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_secret_key
+```
+
+### Run Project
 
 ```bash
 npm run dev
 ```
 
-Server runs on:
+Server will run at:
 
-```bash
+```text
 http://localhost:5000
+```
+
+Frontend:
+
+```text
+http://127.0.0.1:5500/frontend/index.html
 ```
 
 ---
 
-## 📸 Screenshots
+## 🔄 Application Flow
 
-Add screenshots here:
+```text
+Home
+   ↓
+Register
+   ↓
+Login
+   ↓
+Products
+   ↓
+Add To Cart
+   ↓
+Cart
+   ↓
+Checkout
+   ↓
+Order Success
+```
 
-- Login Page
-- Register Page
-- Product Page
-- Cart Page
-- MongoDB Collections
+---
+
+## 🎯 Learning Outcomes
+
+- Full Stack Web Development
+- REST API Development
+- MongoDB Atlas Integration
+- CRUD Operations
+- User Authentication
+- Frontend and Backend Integration
 
 ---
 
 ## 👩‍💻 Developed By
 
-Shamithri
+**Shamithri**
+
+CodeAlpha Internship Project
+
+---
+
+## 📜 License
+
+This project is developed for educational and internship purposes.
